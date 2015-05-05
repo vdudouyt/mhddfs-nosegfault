@@ -1,0 +1,91 @@
+.TH mhddfs "1" "February 2008"
+.SH NAME
+mhddfs \- The driver combines a several mount points into the single one.
+.SH SYNOPSIS
+ mhddfs /dir1,/dir2[,/path/to/dir3] /path/to/mount [-o options]
+ mhddfs /dir1 dir2,dir3 /mount/point [-o options]
+ ...
+ fusermount \-u /path/to/mount
+.SS fstab record example:
+mhddfs#/path/to/dir1,/path/to/dir2 /mnt/point fuse defaults 0 0
+
+mhddfs#/dir1,/dir2,/dir3 /mnt fuse logfile=/var/log/mhddfs.log 0 0
+
+.SH OPTIONS
+
+with an 
+.B "\-o option1,option2..."
+you can specify some additional options:
+
+.SS logfile=/path/to/file.log  
+specify a file that will contain debug information.
+
+.SS loglevel=x
+0 \- debug messages
+
+1 \- info messages
+
+2 \- standard (default) messages
+.SS mlimit=size[m|k|g]
+a free space size threshold
+If a drive has the free space less than the threshold specifed
+then another drive will be choosen while creating a new file. 
+If all the drives have free space less than the threshold
+specified then a drive containing most free space will be
+choosen.
+
+Default value is 4G, minimum value is 100M.
+
+This option accepts suffixes:
+.RS
+[mM] \- megabytes
+
+[gG] \- gigabytes
+
+[kK] \- kilobytes
+.RE
+.PP
+For an information about the additional options see output of:
+.RS
+.B mhddfs \-h
+.RE
+
+.SH DESCRIPTION
+.PP
+The file system allows to unite a several mount points (or directories) to the
+single one. So a one big filesystem is simulated and this makes it possible
+to combine a several hard drives or network file systems. This system is like
+.B unionfs
+but it can choose a drive with the most of free space, and move the
+data between drives transparently for the applications.
+.PP
+While writing files they are written to a 1st hdd until the hdd has
+the free space (see mlimit option), then they are written on a 2nd
+hdd, then to 3rd etc.
+.PP
+.B df 
+will show a total statistics of all filesystems like there is a
+big one hdd.
+.PP
+If an overflow arises while writing to the hdd1 then a file content
+already written will be transferred to a hdd containing enough of
+free space for a file. The transferring is processed on\-the\-fly, fully
+transparent for the application that is writing. So this behaviour
+simulates a big file system.
+.PP
+.SS WARNINGS
+The filesystems are combined must provide a possibility to
+get their parameters correctly (e.g. size of free space). Otherwise
+the writing failure can occur (but data consistency will be ok
+anyway). For example it is a bad idea to combine a several 
+.B sshfs
+systems together.
+
+Please read FUSE documentation for a further conception.
+
+.SH COPYRIGHT
+Distributed under 
+.B GPLv3
+
+Copyright (C) 2008 Dmitry E. Oboukhov 
+.I <dimka@avanto.org>

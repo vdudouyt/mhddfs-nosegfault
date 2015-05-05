@@ -1,0 +1,280 @@
+mhddfs (0.1.39+nmu1ubuntu1) saucy; urgency=low
+
+  * Merge from Debian unstable. Remaining changes:
+    - Makefile: Add -pthread to LDFLAGS to fix underlinking FTBFS.
+
+ -- Logan Rosen <logan@ubuntu.com>  Wed, 15 May 2013 18:42:09 -0400
+
+mhddfs (0.1.39+nmu1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Depend on fuse instead of fuse-utils. (Closes: #698128)
+
+ -- Ansgar Burchardt <ansgar@debian.org>  Sun, 12 May 2013 15:35:08 +0200
+
+mhddfs (0.1.39ubuntu1) raring; urgency=low
+
+  * Makefile: Add -pthread to LDFLAGS to fix underlinking FTBFS.
+
+ -- Logan Rosen <logan@ubuntu.com>  Fri, 19 Apr 2013 15:50:03 -0400
+
+mhddfs (0.1.39) unstable; urgency=low
+
+  * Kalyanov Dmitry optimized readdir function: now we use HASH-tables
+    to deduplicate directories.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Sun, 17 Jun 2012 17:46:43 +0400
+
+mhddfs (0.1.38) unstable; urgency=low
+
+  * Apply hardlinks patch, big thanks for patch to
+    Dermot Duffy <dermot.duffy@gmail.com>.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Wed, 04 May 2011 12:23:01 +0400
+
+mhddfs (0.1.37) unstable; urgency=low
+
+  * Old default mlimit is used.
+  * mlimit=100% is a reasonable request.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Tue, 13 Jul 2010 17:05:40 +0400
+
+mhddfs (0.1.36) experimental; urgency=low
+
+  * Since now mhddfs uses 'mlimit' option in percent,
+    thanks for Robert de Bath <robert@tvisiontech.co.uk>, closes: #588892.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Tue, 13 Jul 2010 15:18:37 +0400
+
+mhddfs (0.1.35) unstable; urgency=low
+
+  * Debian/kfreebsd architectures are built using WITHOUT_XATTR=1 build flag,
+    fixes a few build warnings.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Tue, 15 Jun 2010 09:44:23 +0400
+
+mhddfs (0.1.34) unstable; urgency=low
+
+  * Fixed dependencies on freebsd.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Thu, 03 Jun 2010 21:51:48 +0400
+
+mhddfs (0.1.33) unstable; urgency=low
+
+  * Symlinks are processed properly (set date/time), closes: #575847,
+    thanks for Jools Wills <jools@oxfordinspire.co.uk> for bugreport.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Tue, 01 Jun 2010 16:31:20 +0400
+
+mhddfs (0.1.32) unstable; urgency=low
+
+  * Switch to dpkg-source 3.0 (native) format.
+  * Added startup check to remove duplicaties of mount directories,
+  	closes: #582888.
+  * Debian is upstream linux variant, so we will use debian native
+    package format.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Tue, 01 Jun 2010 15:09:37 +0400
+
+mhddfs (0.1.31-1) unstable; urgency=low
+
+  * Fixed statvfs if a few shares are placed onto one device, closes: #580785.
+  * Added libattr1-dev in B-D, fixed FTBFS, closes: #565037.
+  * Closes unreproducible bugreport (a few months passed), closes: #512649.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Tue, 01 Jun 2010 12:07:00 +0400
+
+mhddfs (0.1.30-1) UNRELEASE; urgency=low
+
+  * Another BSD build problem.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 11 Jan 2010 23:07:30 +0300
+
+mhddfs (0.1.29-1) UNRELEASE; urgency=low
+
+  * Building under FreeBSD is fixed.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 11 Jan 2010 11:49:17 +0300
+
+mhddfs (0.1.28-1) unstable; urgency=high
+
+  * Fixed creating parent directories when item is moved between shares. 
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 18 Dec 2009 22:59:15 +0300
+
+mhddfs (0.1.27-1) unstable; urgency=high
+
+  * Fixed renaming a directory bug,
+    thanks for Nathan Grennan <dimka@cygnusx-1.org>.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Sat, 12 Dec 2009 14:24:22 +0300
+
+mhddfs (0.1.26-1) unstable; urgency=low
+
+  * Fixed memory leak in extended attribute patch.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Thu, 26 Nov 2009 00:37:42 +0300
+
+mhddfs (0.1.25-1) unstable; urgency=low
+
+  * Rewite rename mechanizm to properly rename directories which are
+    present in many hdds.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 16 Nov 2009 00:25:36 +0300
+
+mhddfs (0.1.24-1) unstable; urgency=low
+
+  * Applied extended attribute patch, thanks for
+    Glenn Washburn <gwashburn@Crossroads.com>.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 30 Oct 2009 09:52:00 +0300
+
+mhddfs (0.1.23-1) unstable; urgency=low
+
+  * Fixed rename mechanizm if files are in different hdds, closes: #547172,
+    tanks to Pozsar Balazs <pozsy@uhulinux.hu> for bugreport.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Tue, 29 Sep 2009 12:51:02 +0400
+
+mhddfs (0.1.22-1) unstable; urgency=low
+
+  * Finally fixed deadlock when it moves file between sources.
+  * Bumped Standards-Version to 3.8.2.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Thu, 02 Jul 2009 18:04:18 +0400
+
+mhddfs (0.1.21-1) unstable; urgency=low
+
+  * Fixed deadlock when it closes bad file descrioption.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Thu, 02 Jul 2009 12:09:17 +0400
+
+mhddfs (0.1.20-1) unstable; urgency=low
+
+  * New upstream version.
+   * Fixed possible deadlock when it moves file between sources.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Wed, 01 Jul 2009 09:28:29 +0400
+
+mhddfs (0.1.19-1) unstable; urgency=low
+
+  * Check free space is better than before: code will return the error if
+    it does not find free space.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Wed, 11 Mar 2009 12:55:19 +0300
+
+mhddfs (0.1.18-1) unstable; urgency=low
+
+  * New upstream release. Fixed deadlocks.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 29 Dec 2008 12:06:57 +0300
+
+mhddfs (0.1.17-1) unstable; urgency=low
+
+  * New upstream release. Now the mount's directories can be
+    input with the help of spaces. closes: #508330.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 12 Dec 2008 22:53:44 +0300
+
+mhddfs (0.1.17~debug-1) norelease; urgency=low
+
+  * Test version for find segfault.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 24 Oct 2008 12:16:17 +0400
+
+mhddfs (0.1.16-1) unstable; urgency=low
+
+  * Revert to old lock-scheme.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 20 Oct 2008 15:20:10 +0400
+
+mhddfs (0.1.15-1) unstable; urgency=low
+
+  * New upstream release (fixed segfault on mhdd_fileopen).
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 20 Oct 2008 14:44:47 +0400
+
+mhddfs (0.1.13-1) unstable; urgency=low
+
+  * New release.
+  * Fix few linker options, closes: #499380.
+  * Added lock for debug-stream when writing debug messages.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 13 Oct 2008 15:32:01 +0400
+
+mhddfs (0.1.12-1) unstable; urgency=low
+
+  * New release (Now SGID-bit works fine).
+  * Added Vcs-Browser: to debian/control.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 11 Jul 2008 23:38:18 +0400
+
+mhddfs (0.1.11-1) unstable; urgency=medium
+
+  * New release (fix detect filesystem overflow. Thanks lordikc
+    <lordikc@free.fr>.)
+  * Standards-Version bumped to 3.8.0.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Mon, 16 Jun 2008 23:47:54 +0400
+
+mhddfs (0.1.10-2) unstable; urgency=low
+
+  * My email address has been changed.
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Fri, 30 May 2008 07:56:05 +0400
+
+mhddfs (0.1.10-1) unstable; urgency=low
+
+  * New release.
+  * Upload sponsored by Al Nikolov <clown@debian.org>
+
+ -- Dmitry E. Oboukhov <dimka@avanto.org>  Sun,  4 May 2008 18:28:15 +0400
+
+mhddfs (0.1.8-2) unstable; urgency=low
+
+  * Changed description, closes: #477796.
+  * Added homepage url to debian/control.
+  * Upload sponsored by Al Nikolov <clown@debian.org>
+
+ -- Dmitry E. Oboukhov <dimka@avanto.org>  Fri, 25 Apr 2008 14:50:09 +0400
+
+mhddfs (0.1.8-1) unstable; urgency=low
+
+  * New release.
+  * Upload sponsored by Al Nikolov <clown@debian.org>
+
+ -- Dmitry E. Oboukhov <dimka@avanto.org>  Fri, 11 Apr 2008 01:02:34 +0400
+
+mhddfs (0.1.7-1) unstable; urgency=low
+
+  * New release.
+  * Upload sponsored by Al Nikolov <clown@debian.org>
+
+ -- Dmitry E. Oboukhov <dimka@avanto.org>  Thu, 03 Apr 2008 18:18:36 +0400
+
+mhddfs (0.1.6-1) unstable; urgency=low
+
+  * New version.
+  * Added debian/watch file.
+  * Upload sponsored by Al Nikolov <clown@debian.org>
+
+ -- Dmitry E. Oboukhov <dimka@avanto.org>  Sat, 22 Mar 2008 13:06:18 +0300
+
+mhddfs (0.1.5-1) unstable; urgency=low
+
+  * New version.
+
+ -- Dmitry E. Oboukhov <dimka@avanto.org>  Sat, 22 Mar 2008 00:55:18 +0300
+
+mhddfs (0.1.4-1) unstable; urgency=low
+
+  * New release (manpage added).
+
+ -- Dmitry E. Oboukhov <dimka@avanto.org>  Thu, 20 Mar 2008 23:59:57 +0300
+
+mhddfs (0.1.3-1) unstable; urgency=low
+
+  * Initial release (Closes: #471880).
+
+ -- Dmitry E. Oboukhov <dimka@avanto.org>  Thu, 20 Mar 2008 22:23:19 +0300
+

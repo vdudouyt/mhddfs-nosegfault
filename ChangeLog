@@ -1,0 +1,87 @@
+0.1.1
+* Added changelog;
+* Using pthread_mutex for multithread;
+* Added -s (single thread) option;
+
+0.1.2
+* Added English README
+* Optimized open/create
+* removed lock (not needed)
+
+0.1.3
+* Added option ' -o loglevel=dd':
+	0 - debug level
+	1 - info level
+	2 - default level
+0.1.4
+* Added man page
+
+0.1.5
+* created objects belong creates (was mount-user) (if mount-user ==root)
+
+0.1.6
+* fix permissions after move files.
+
+0.1.7
+* fix readlink function.
+
+0.1.8
+* Parse the command line using the fuse-lib.
+
+0.1.9
+* New files are created only on a partition with enough space
+
+0.1.10
+* call chown only if uid==0
+* New directories are created only on a partition with enough space
+
+0.1.11
+* fix detect filesystem overflow. Thanks lordikc <lordikc@free.fr>.
+
+0.1.12
+* SGID-attribute works correctly
+* option -V shows version of mhddfs
+
+0.1.13
+* Fix flags in Makefile (fixed build with --as-needed),
+thanks for Vladimir V. Kamarzin <vvk@altlinux.org>
+* Added lock for debug-stream when writing debug messages
+thanks for Andrew McGill <list2008@lunch.za.net>
+
+0.1.14
+* Fix segfault on mhdd_internal_open (locks added), 
+thanks to Konstantin Zavialov <konstantin.z@gmail.com>
+
+0.1.16
+* Revert to old locks scheme.
+
+0.1.17
+* Added standard variant for list of directories.
+ Now it works:
+ 	mhddfs /dir1 /dir2 /mount
+ and old variant works too:
+ 	mhddfs /dir1,/dir2 /mount
+* Reformatted sources.
+
+0.1.21
+* Fixed possible deadlocks
+
+0.1.24
+* Applied extended attribute patch, thanks for
+Glenn Washburn <gwashburn@Crossroads.com>.
+
+0.1.26
+* Fixed memory leak in extended attribute patch
+
+0.1.27
+* Fixed renaming directory bug, thanks for
+Nathan Grennan <dimka@cygnusx-1.org>
+
+0.1.31
+* Fixed statvfs if a few shares are placed onto one device.
+
+0.1.32
+* Added startup check to remove duplicaties of mount directories.
+
+0.1.33
+* Symlinks are processed properly (set date/time).
