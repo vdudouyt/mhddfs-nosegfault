@@ -1,0 +1,49 @@
+# valgrind mhddfs /pool/storage01,/pool/storage02/,/pool/storage03,/pool/storage04 /storage -o rw,default_permissions,allow_other,mlimit=99,dev,suid -f
+==31719== Memcheck, a memory error detector
+==31719== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+==31719== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+==31719== Command: mhddfs /pool/storage01,/pool/storage02/,/pool/storage03,/pool/storage04 /storage -o rw,default_permissions,allow_other,mlimit=99,dev,suid -f
+==31719==
+mhddfs: directory '/pool/storage01' added to list
+mhddfs: directory '/pool/storage02/' added to list
+mhddfs: directory '/pool/storage03' added to list
+mhddfs: directory '/pool/storage04' added to list
+mhddfs: mount to: /storage
+mhddfs: move size limit 99%
+==31719== Thread 2:
+==31719== Invalid read of size 8
+==31719== at 0x404D51: mhdd_readdir (main.c:272)
+==31719== by 0x4E3D565: fuse_fs_readdir (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E3D7B7: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E45215: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E464F6: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E4317A: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x53FCB4F: start_thread (pthread_create.c:304)
+==31719== Address 0x5a93c80 is 16 bytes inside a block of size 72 free'd
+==31719== at 0x4C27D4E: free (vg_replace_malloc.c:427)
+==31719== by 0x404D1C: mhdd_readdir (main.c:270)
+==31719== by 0x4E3D565: fuse_fs_readdir (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E3D7B7: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E45215: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E464F6: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E4317A: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x53FCB4F: start_thread (pthread_create.c:304)
+==31719==
+==31719== Invalid read of size 8
+==31719== at 0x404D64: mhdd_readdir (main.c:272)
+==31719== by 0x4E3D565: fuse_fs_readdir (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E3D7B7: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E45215: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E464F6: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E4317A: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x53FCB4F: start_thread (pthread_create.c:304)
+==31719== Address 0x5a93c80 is 16 bytes inside a block of size 72 free'd
+==31719== at 0x4C27D4E: free (vg_replace_malloc.c:427)
+==31719== by 0x404D1C: mhdd_readdir (main.c:270)
+==31719== by 0x4E3D565: fuse_fs_readdir (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E3D7B7: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E45215: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E464F6: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x4E4317A: ??? (in /lib/x86_64-linux-gnu/libfuse.so.2.9.0)
+==31719== by 0x53FCB4F: start_thread (pthread_create.c:304)
+==31719==
