@@ -33,6 +33,10 @@
 #include <sys/time.h>
 #include <utime.h>
 
+#include <execinfo.h>
+#include <signal.h>
+#include <unistd.h>
+
 #ifndef WITHOUT_XATTR
 #include <attr/xattr.h>
 #endif
@@ -43,6 +47,22 @@
 #include "debug.h"
 
 #include <uthash.h>
+
+void save_backtrace(int sig)
+{
+  void *array[10];
+  size_t size;
+
+  // get void*'s for all entries on the stack
+  size = backtrace(array, 10);
+
+  // print out all the frames to stderr
+  fprintf(stderr, "Error: signal %d\n", sig);
+  FILE *log = fopen("/tmp/mhddfs_backtrace.log", "w");
+  backtrace_symbols_fd(array, size, fileno(log));
+  fclose(log);
+  exit(1);
+}
 
 // getattr
 static int mhdd_stat(const char *file_name, struct stat *buf)
@@ -1048,5 +1068,6 @@ int main(int argc, char *argv[])
 	mhdd_debug_init();
 	struct fuse_args *args = parse_options(argc, argv);
 	flist_init();
+	signal(SIGSEGV, save_backtrace);
 	return fuse_main(args->argc, args->argv, &mhdd_oper, 0);
 }

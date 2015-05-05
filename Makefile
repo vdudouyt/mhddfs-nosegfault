@@ -22,8 +22,9 @@ DEPS	=	$(OBJ:obj/%.o=obj/%.d)
 
 TARGET	=	mhddfs
 
-CFLAGS	=	-Wall $(shell pkg-config fuse --cflags) \
-			-DFUSE_USE_VERSION=26 -MMD
+CFLAGS  =       -Wall $(shell pkg-config fuse --cflags) \
+                        -DFUSE_USE_VERSION=26 -MMD -g -rdynamic -O0
+
 ifdef WITHOUT_XATTR
 CFLAGS	+=	-DWITHOUT_XATTR
 endif
