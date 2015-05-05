@@ -53,7 +53,7 @@ SRCDIR	=	$(shell rpm --eval '%_sourcedir')
 ifeq ($(DEBVERSION), $(VERSION))
 all: $(TARGET)
 else
-all: update_version $(TARGET)
+all: $(TARGET)
 endif
 
 update_version:
