@@ -37,6 +37,8 @@
 #include <signal.h>
 #include <unistd.h>
 
+#include <glib.h>
+
 #ifndef WITHOUT_XATTR
 #include <attr/xattr.h>
 #endif
@@ -45,8 +47,6 @@
 #include "tools.h"
 
 #include "debug.h"
-
-#include <uthash.h>
 
 void save_backtrace(int sig)
 {
@@ -181,16 +181,13 @@ static int mhdd_readdir(
 	mhdd_debug(MHDD_MSG, "mhdd_readdir: %s\n", dirname);
 	char **dirs = (char **) calloc(mhdd.cdirs+1, sizeof(char *));
 
+	struct stat st;
+
 	typedef struct dir_item {
 		char            *name;
 		struct stat     *st;
-		UT_hash_handle   hh;
 	} dir_item;
 
-	dir_item * items_ht = NULL;
-
-
-	struct stat st;
 
 	// find all dirs
 	for(i = j = found = 0; i<mhdd.cdirs; i++) {
@@ -214,6 +211,8 @@ static int mhdd_readdir(
 		return -errno;
 	}
 
+	GHashTable* hash = g_hash_table_new(g_str_hash, g_str_equal);
+
 	// read directories
 	for (i = 0; dirs[i]; i++) {
 		struct dirent *de;
@@ -224,51 +223,43 @@ static int mhdd_readdir(
 		while((de = readdir(dh))) {
 			// find dups
 			
-			struct dir_item *prev;
-
-			HASH_FIND_STR(items_ht, de->d_name, prev);
-
-			if (prev) {
+			if(g_hash_table_lookup(hash, de->d_name))
+			{
 				continue;
 			}
 
 			// add item
 			char *object_name = create_path(dirs[i], de->d_name);
-			struct dir_item *new_item =
-				calloc(1, sizeof(struct dir_item));
+			struct dir_item *new_item =	calloc(1, sizeof(struct dir_item));
 
 			new_item->name = strdup(de->d_name);
 			new_item->st = calloc(1, sizeof(struct stat));
 			lstat(object_name, new_item->st);
 
-			HASH_ADD_KEYPTR(
-				hh,
-				items_ht,
-				new_item->name,
-				strlen(new_item->name),
-				new_item
-			);
+			g_hash_table_insert(hash, new_item->name, new_item);
 			free(object_name);
 		}
 
 		closedir(dh);
 	}
 
-	dir_item *item, *tmp;
+	dir_item *item;
 
-	// fill list
-	HASH_ITER(hh, items_ht, item, tmp) {
-		if (filler(buf, item->name, item->st, 0))
-			break;
-	}
+	gpointer key, value;	
+	GHashTableIter iter;
+	g_hash_table_iter_init(&iter, hash);
 
-	// free memory
-	HASH_ITER(hh, items_ht, item, tmp) {
+	while(g_hash_table_iter_next (&iter, &key, &value))
+	{
+		item = (dir_item*) value;
+		int result = filler(buf, item->name, item->st, 0);
 		free(item->name);
 		free(item->st);
 		free(item);
+		if(result) break;
 	}
-	HASH_CLEAR(hh, items_ht);
+
+	g_hash_table_destroy(hash);
 
 	for (i = 0; dirs[i]; i++)
 		free(dirs[i]);

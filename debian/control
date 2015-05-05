@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 5),
  libfuse-dev,
  pkg-config,
  libattr1-dev,
- uthash-dev
+ libglib2.0-dev
 Standards-Version: 3.8.4
 Homepage: http://mhddfs.uvw.ru
 Vcs-Browser: http://svn.uvw.ru/mhddfs/trunk
