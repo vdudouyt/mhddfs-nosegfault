@@ -1,3 +1,10 @@
+mhddfs (0.1.39+nosegfault1) saucy; urgency=low
+
+  * Merge from Debian unstable. Remaining changes:
+    - Makefile: Add -pthread to LDFLAGS to fix underlinking FTBFS.
+
+ -- Valentin Dudouyt <valentin.dudouyt@gmail.com>  Wed, 12 May 2015 10:31:21 +0700
+
 mhddfs (0.1.39+nmu1ubuntu1) saucy; urgency=low
 
   * Merge from Debian unstable. Remaining changes:
