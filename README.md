@@ -19,7 +19,7 @@ CentOS
 ```nohighlight
 yum install git fuse-devel glib2-devel gcc make libattr-devel
 git clone https://github.com/vdudouyt/mhddfs-nosegfault/
-make && make install
+make && cp mhddfs /usr/bin/
 ```
 
 Debian
