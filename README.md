@@ -17,7 +17,7 @@ http://stackoverflow.com/questions/18006602/mhddfs-automount-failure-and-home-di
 
 CentOS
 ```nohighlight
-yum install git fuse-devel glib2-devel gcc make libattr-devel
+yum install git fuse fuse-devel glib2-devel gcc make libattr-devel
 git clone https://github.com/vdudouyt/mhddfs-nosegfault/
 make && cp mhddfs /usr/bin/
 ```
