@@ -12,3 +12,17 @@ http://serverfault.com/questions/677352/mhddfs-randomly-breaks
 http://stackoverflow.com/questions/24966676/transport-endpoint-is-not-connected
 
 http://stackoverflow.com/questions/18006602/mhddfs-automount-failure-and-home-disconnection 
+
+## Installation
+
+CentOS
+```nohighlight
+yum install git fuse-devel glib2-devel gcc make libattr-devel
+git clone https://github.com/vdudouyt/mhddfs-nosegfault/
+make && make install
+```
+
+Debian
+```nohighlight
+fakeroot dpkg-buildpackage
+```
