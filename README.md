@@ -26,3 +26,11 @@ Debian
 ```nohighlight
 fakeroot dpkg-buildpackage
 ```
+
+## FUSE version concerns
+
+It was reported that sometimes, mhddfs exits with the following error due to an internal bug in FUSE. It's highly suggested to use at least version 2.9.4 of FUSE in order to avoid that.
+
+```nohighlight
+fuse internal error: node 2238037 not found
+```
