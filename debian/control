@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Dmitry E. Oboukhov <unera@debian.org>
 Build-Depends: debhelper (>= 5),
- libfuse-dev,
+ libfuse-dev (>= 2.9.4),
  pkg-config,
  libattr1-dev,
  libglib2.0-dev
