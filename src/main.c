@@ -38,6 +38,7 @@
 #include <unistd.h>
 
 #include <glib.h>
+#include <sys/resource.h>
 
 #ifndef WITHOUT_XATTR
 #include <attr/xattr.h>
@@ -1019,6 +1020,19 @@ static int mhdd_removexattr(const char *path, const char *attrname)
 }
 #endif
 
+static void limits_init()
+{
+   struct rlimit limit;
+   limit.rlim_cur = 512000;
+   limit.rlim_max = 512000;
+
+   if(setrlimit(RLIMIT_NOFILE, &limit) != 0)
+   {
+      perror("setrlimit() failed");
+      exit(-1);
+   }
+}
+
 // functions links
 static struct fuse_operations mhdd_oper = {
 	.getattr    	= mhdd_stat,
@@ -1059,6 +1073,7 @@ int main(int argc, char *argv[])
 	mhdd_debug_init();
 	struct fuse_args *args = parse_options(argc, argv);
 	flist_init();
+	limits_init();
 	signal(SIGSEGV, save_backtrace);
 	return fuse_main(args->argc, args->argv, &mhdd_oper, 0);
 }
