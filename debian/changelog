@@ -1,7 +1,12 @@
+mhddfs (0.1.39+nosegfault2) saucy; urgency=low
+
+  * Require as least FUSE 2.9.4 to prevent an internal error: node ***** not found
+  * Setup ulimits on startup to prevent "too many open files"
+
+ -- Valentin Dudouyt <valentin.dudouyt@gmail.com>  Wed, 12 May 2015 10:31:21 +0700
 mhddfs (0.1.39+nosegfault1) saucy; urgency=low
 
-  * Merge from Debian unstable. Remaining changes:
-    - Makefile: Add -pthread to LDFLAGS to fix underlinking FTBFS.
+  * Fixed a segmentation fault
 
  -- Valentin Dudouyt <valentin.dudouyt@gmail.com>  Wed, 12 May 2015 10:31:21 +0700
 
