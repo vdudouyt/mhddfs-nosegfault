@@ -1,6 +1,6 @@
 # mhddfs-nosegfault
 
-Mhddfs fork for real environment
+Mhddfs meets the real environment
 
 * No more segmentation faults which were introduced in 0.1.39. This was a main cause of 'Transport endpoint is not connected'
 * Configure ulimits on startup to avoid the 'too many file descriptors' error on big production servers
