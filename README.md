@@ -1,5 +1,12 @@
 # mhddfs-nosegfault
-Mhddfs without a 'Transport endpoint is not connected' bug which was introduced in 0.1.39. This repository will be discounted as soon as I'll receive a response from maintainer.
+
+Mhddfs fork for real environment
+
+* No more segmentation faults which were introduced in 0.1.39. This was a main cause of 'Transport endpoint is not connected'
+* Configure ulimits on startup to avoid the 'too many file descriptors' error on big production servers
+* Require a proper version of FUSE in order to avoid "fuse internal error: node XXXXXX not found"
+
+This repository will be discounted as soon as I'll receive a response from maintainer.
 
 ## Preamble
 
