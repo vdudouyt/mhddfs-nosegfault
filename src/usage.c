@@ -25,6 +25,7 @@ void usage(FILE * to)
 		"\n"
 		"Multi-hdd FUSE filesystem\n"
 		" Copyright (C) 2008, Dmitry E. Oboukhov <dimka@avanto.org>\n"
+		" Copyright (C) 2015, Valentin Dudouyt <valentin.dudouyt@gmail.com>\n"		
 		"\n"
 		"Usage:\n"
 		" mhddfs dir1,dir2.. mountpoint [ -o OPTIONS ]\n"
