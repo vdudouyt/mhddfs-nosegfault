@@ -1,0 +1,8 @@
+#!/bin/bash
+# Builds a .deb file using Docker to keep your host system tidy
+# IronicBadger <ironicbadger@linuxserver.io>
+
+docker build -t mhddfs-nosegfault .
+id=$(docker create --name mhddfs-nosegfault-tmp mhddfs-nosegfault)
+docker cp $id:/artifact/mhddfs_0.1.39+nosegfault2_amd64.deb .
+docker rm -v $id

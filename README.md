@@ -34,6 +34,14 @@ Debian
 fakeroot dpkg-buildpackage
 ```
 
+Docker
+
+```nohighlight
+./build-docker
+dpkg -i mhddfs_0.1.39+nosegfault2_amd64.deb
+docker rmi <image-id>
+```
+
 ## FUSE version concerns
 
 It was reported that sometimes, mhddfs exits with the following error due to an internal bug in FUSE. It's highly suggested to use at least version 2.9.4 of FUSE in order to avoid that.
