@@ -39,7 +39,7 @@ Docker
 ```nohighlight
 ./build-docker
 dpkg -i mhddfs_0.1.39+nosegfault2_amd64.deb
-docker rm \<image-id\>
+docker rm <image-id>
 ```
 
 ## FUSE version concerns
