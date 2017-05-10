@@ -49,3 +49,6 @@ It was reported that sometimes, mhddfs exits with the following error due to an 
 ```nohighlight
 fuse internal error: node 2238037 not found
 ```
+
+## /etc/fstab rules
+mhddfs#/pool/storage00,/pool/storage01,/pool/storage02 /storage fuse default_permissions,allow_other,mlimit=99 0 0
