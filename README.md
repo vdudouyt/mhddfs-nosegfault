@@ -51,4 +51,6 @@ fuse internal error: node 2238037 not found
 ```
 
 ## /etc/fstab rules
+```nohighlight
 mhddfs#/pool/storage00,/pool/storage01,/pool/storage02 /storage fuse default_permissions,allow_other,mlimit=99 0 0
+```
