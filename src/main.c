@@ -607,7 +607,7 @@ static int mhdd_rename(const char *from, const char *to)
 	struct stat sto, sfrom;
 	char *obj_from, *obj_to;
 	int from_is_dir = 0, to_is_dir = 0, from_is_file = 0, to_is_file = 0;
-	int to_dir_is_empty = 1;
+	int to_dir_is_empty = 1, to_is_link = 0;
 
 	if (strcmp(from, to) == 0)
 		return 0;
@@ -624,6 +624,10 @@ static int mhdd_rename(const char *from, const char *to)
 			}
 			else
 				to_is_file++;
+			if (lstat(obj_to, &sto) == 0) {
+				if ((sto.st_mode & S_IFMT) == S_IFLNK)
+					to_is_link++;
+			}
 		}
 		if (stat(obj_from, &sfrom) == 0) {
 			if (S_ISDIR (sfrom.st_mode))
@@ -638,7 +642,7 @@ static int mhdd_rename(const char *from, const char *to)
 			return -ENOTDIR;
 		if (to_is_file && to_is_dir)
 			return -ENOTEMPTY;
-		if (from_is_dir && !to_dir_is_empty)
+		if (from_is_dir && !to_dir_is_empty && !to_is_link)
 			return -ENOTEMPTY;
 	}
 
@@ -654,9 +658,10 @@ static int mhdd_rename(const char *from, const char *to)
 	for (i = 0; i < mhdd.cdirs; i++) {
 		obj_to   = create_path(mhdd.dirs[i], to);
 		obj_from = create_path(mhdd.dirs[i], from);
-		if (stat(obj_from, &sfrom) == 0) {
+		if (lstat(obj_from, &sfrom) == 0) {
 			/* if from is dir and at the same time file,
-			   we only rename dir */
+			   we only rename dir, using lstat because we
+			   should handle symlinks here as well */
 			if (from_is_dir && from_is_file) {
 				if (!S_ISDIR(sfrom.st_mode)) {
 					free(obj_from);
